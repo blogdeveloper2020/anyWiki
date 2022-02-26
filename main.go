@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/json"
 	"html/template"
 	"log"
 	"net/http"
@@ -14,15 +13,6 @@ type IndexData struct {
 }
 
 func index(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
-	var indexData IndexData
-	indexData.Title = "anyWiki"
-	indexData.Desc = "a wiki web application"
-	jsonStr, _ := json.Marshal(indexData)
-	w.Write(jsonStr)
-}
-
-func indexHtml(w http.ResponseWriter, r *http.Request) {
 	var indexData IndexData
 	indexData.Title = "anyWiki"
 	indexData.Desc = "你好,欢迎来到anyWiki"
@@ -39,7 +29,6 @@ func main() {
 		Addr: "127.0.0.1:8800",
 	}
 	http.HandleFunc("/", index)
-	http.HandleFunc("/index.html", indexHtml)
 
 	if err := server.ListenAndServe(); err != nil {
 		log.Println(err)
