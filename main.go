@@ -81,6 +81,8 @@ func main() {
 		Addr: "127.0.0.1:8800",
 	}
 	http.HandleFunc("/", index)
+	//静态资源加载
+	http.Handle("/resource/", http.StripPrefix("/resource", http.FileServer(http.Dir("public/resource/"))))
 
 	if err := server.ListenAndServe(); err != nil {
 		log.Println(err)
