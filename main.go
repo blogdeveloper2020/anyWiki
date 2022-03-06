@@ -1,6 +1,8 @@
 package main
 
 import (
+	"anyWiki/config"
+	"anyWiki/models"
 	"html/template"
 	"log"
 	"net/http"
@@ -29,7 +31,13 @@ func index(w http.ResponseWriter, r *http.Request) {
 	t, _ = t.ParseFiles(path+"/template/index.html",
 		home, header, footer, personal, pagination, poster)
 	//2.output the indexData to html file
-	t.Execute(w, indexData)
+	viewer:=config.Viewer{
+		Title: "AnyWiki",
+		Description: "AnyWiki"
+		Logo: "",
+	}
+	var hr = &models.HomeResponse{}
+	t.Execute(w, hr)
 }
 
 func main() {
