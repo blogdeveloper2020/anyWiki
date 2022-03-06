@@ -4,11 +4,11 @@
     Navigation = ["首页","/","Go语言","/golang","归档","/pigeonhole","关于","/about"]
     Bilibili =""
     Zhihu=""
-    Avatar = ""
+    Avatar = "https://cn.bing.com/images/search?view=detailV2&ccid=Qcd3zh%2fG&id=1B10F57426EFD78DEB2FB7893BC9219778A40CA6&thid=OIP.Qcd3zh_GkyDSQaPAKhZBTAHaEo&mediaurl=https%3a%2f%2fimages7.alphacoders.com%2f634%2fthumb-1920-634829.jpg&exph=1200&expw=1920&q=%e9%b2%81%e9%b2%81%e4%bf%ae+%e5%a4%b4%e5%83%8f&simid=608035758685492693&FORM=IRPRST&ck=DBD4BEFBAD8288D0AC0EEB178193C1AB&selectedIndex=3&ajaxhist=0&ajaxserp=0"
     UserName="tom"
     UserDesc = "英俊"
 [system]
-    CdnUrl=""
+    CdnUrl="https://static.mszlu.com/goblog/es6/md-assets"
     QiniuSecretKey=""
     QiniuAccessKey=""
     Valine=true
