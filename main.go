@@ -6,7 +6,6 @@ import (
 	"html/template"
 	"log"
 	"net/http"
-	"os"
 )
 
 type IndexData struct {
@@ -20,7 +19,7 @@ func index(w http.ResponseWriter, r *http.Request) {
 	indexData.Desc = "你好,欢迎来到anyWiki"
 	t := template.New("index.html")
 	//1.get current path
-	path, _ := os.Getwd()
+	path := config.Cfg.System.CurrentDir
 	home := path + "/template/home.html"
 	header := path + "/template/layout/header.html"
 	footer := path + "/template/layout/footer.html"
@@ -31,11 +30,7 @@ func index(w http.ResponseWriter, r *http.Request) {
 	t, _ = t.ParseFiles(path+"/template/index.html",
 		home, header, footer, personal, pagination, poster)
 	//2.output the indexData to html file
-	viewer:=config.Viewer{
-		Title: "AnyWiki",
-		Description: "AnyWiki"
-		Logo: "",
-	}
+	viewer := config.Viewer{}
 	var hr = &models.HomeResponse{}
 	t.Execute(w, hr)
 }
