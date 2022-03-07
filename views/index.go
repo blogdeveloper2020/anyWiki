@@ -1,12 +1,10 @@
 package views
 
 import (
+	"anyWiki/common"
 	"anyWiki/config"
 	"anyWiki/models"
-	"html/template"
-	"log"
 	"net/http"
-	"time"
 )
 
 type IndexData struct {
@@ -14,37 +12,9 @@ type IndexData struct {
 	Desc  string `json:"desc"`
 }
 
-func IsODD(num int) bool {
-	return num%2 == 0
-}
-func GetNextName(strs []string, index int) string {
-	return strs[index+1]
-}
-
-func Date(layout string) string {
-	return time.Now().Format(layout)
-}
-
 func (*HTMLApi) Index(w http.ResponseWriter, r *http.Request) {
-	var indexData IndexData
-	indexData.Title = "anyWiki"
-	indexData.Desc = "你好,欢迎来到anyWiki"
-	t := template.New("index.html")
-	//1.get current path
-	path := config.Cfg.System.CurrentDir
-	home := path + "/template/home.html"
-	header := path + "/template/layout/header.html"
-	footer := path + "/template/layout/footer.html"
-	personal := path + "/template/layout/personal.html"
-	pagination := path + "/template/layout/pagination.html"
-	postList := path + "/template/layout/post-list.html"
-	t.Funcs(template.FuncMap{"isODD": IsODD, "getNextName": GetNextName, "date": Date})
-	t, err := t.ParseFiles(path+"/template/index.html",
-		home, header, footer, personal, pagination, postList)
-	if err != nil {
-		log.Println(err)
-	}
-	//2.output the indexData to html file
+	index := common.Template.Index
+
 	var categories = []models.Category{
 		{
 			Cid:  1,
@@ -74,5 +44,7 @@ func (*HTMLApi) Index(w http.ResponseWriter, r *http.Request) {
 		[]int{1},
 		true,
 	}
-	t.Execute(w, hr)
+
+	index.WriteData(w, hr)
+
 }
