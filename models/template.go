@@ -22,6 +22,10 @@ func Date(layout string) string {
 	return time.Now().Format(layout)
 }
 
+func DateDay(date time.Time) string {
+	return date.Format("2006-01-02 15:04:05")
+}
+
 type HtmlTemplate struct {
 	Index      TemplateBlog
 	Category   TemplateBlog
@@ -66,7 +70,8 @@ func readTemplate(templates []string, templateDir string) []TemplateBlog {
 		personal := templateDir + "layout/personal.html"
 		pagination := templateDir + "layout/pagination.html"
 		postList := templateDir + "layout/post-list.html"
-		t.Funcs(template.FuncMap{"isODD": IsODD, "getNextName": GetNextName, "date": Date})
+		t.Funcs(template.FuncMap{"isODD": IsODD, "getNextName": GetNextName,
+			"date": Date, "dateDay": DateDay})
 		t, err := t.ParseFiles(templateDir+viewName,
 			home, header, footer, personal, pagination, postList)
 		if err != nil {
